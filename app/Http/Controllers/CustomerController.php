@@ -95,7 +95,8 @@ class CustomerController extends Controller
 
     public function print(Customer $customer)
     {
-        return view('customer.print', compact('customer'));
+        $userAddress = auth()->user()->user_addresses()->first();
+        return view('customer.print', compact('customer', 'userAddress'));
     }
 
     public function showCustomerImportForm()
@@ -110,7 +111,7 @@ class CustomerController extends Controller
         ]);
         dd($request);
     }
-
+    
     public function validateRequest($request)
     {
         return $request->validate([

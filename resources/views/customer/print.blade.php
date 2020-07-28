@@ -20,6 +20,9 @@ th{
 }
 	@media print{
 		@page {size: landscape}
+		.border-bottom{
+			border: none!important;
+		}
 		.row
 		{
           transform: scale(1.05);
@@ -45,16 +48,31 @@ th{
 			text-decoration: underline;
 			font-size: 45px!important;
 		}
+		.parcel-number{
+			text-transform: uppercase;
+			position: absolute;
+			bottom: 7rem;
+			left: -7rem;
+			transform: rotate(-90deg)
+		}
 	}
 </style>
-<body>
+@if(!isset($userAddress) && empty($userAddress) )
+	<script>
+		alert('Please add your address details first.');
+		location.replace('{{route("home")}}');
+	</script>
+@endif
+<body onafterprint="myFunction()">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<table class="mb-0  table fs-75">
 					<thead>
 						<tr>
-							<th colspan="3" class="border-0 text-center font-size">TO</th>
+							<th colspan="3" class="border-0 text-center font-size">
+								<span class="border-bottom">TO</span>
+							</th>
 						</tr>
 					</thead>
 					<tbody class="text-justify ">
@@ -87,7 +105,12 @@ th{
 							<td class="border-0">
 								<span class="font-weight-bold" style="margin-left: -2rem">
 								<i class="fas fa-map-pin"></i>
-								{{$customer->pincode ? '$customer->pincode':'N|A'}}</span>
+								@empty(!$customer->pincode)
+									{{$customer->pincode}}
+								@else
+									{{__('N|A')}}
+								@endempty
+								</span>
 							</td>
 						</tr>
 					</tbody>
@@ -95,19 +118,21 @@ th{
 				<table class="mb-0 table mt-5">
 					<thead>
 						<tr>
-							<th colspan="3" class="border-0 text-center font-size">From</th>
+							<th colspan="3" class="border-0 text-center font-size">
+								<span class="border-bottom">From</span>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td class="border-0">
-								<span class="font-weight-bold">{{'Shree Balaji Photocopiers'}}</span>
+								<span class="font-weight-bold">{{$userAddress->user->name}}</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="border-0"> 
 								<span class="font-weight-bold">
-									{{'Shop no 211, 2nd floor Grain house'}}<br>{{'Chawani ,Indore'}}
+									{{$userAddress->addressline1}},{{$userAddress->addressline2}}<br>{{$userAddress->addressline3}}
 								</span>
 							</td>
 						</tr>
@@ -115,23 +140,43 @@ th{
 							<td class="border-0">
 								<span class="font-weight-bold">
 								<i class="fas fa-mobile"></i>
-								{{9630035421}}</span>
+								{{$userAddress->pincode}}</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="border-0">
 								<span class="font-weight-bold" style="margin-left: -2rem">
 								<i class="fas fa-map-pin"></i>
-								{{452001}}</span>
+								{{$userAddress->number}}</span>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			<div class="col-4">
+				<h2 class="parcel-number">Parcel number - <span id="parcel"></span></h2>
+			</div>
 		</div>
 	</div>	
 	<script>
-		window.print();
+		function myFunction(params) {
+			setTimeout(function(){
+				window.close();
+			}, 500);
+		}
+		let parcelnumber = prompt('Please enter parcel number.');
+		if (typeof parcelnumber == 'string') {
+			if(parcelnumber.length){
+				$('#parcel').html(parcelnumber);
+				window.print();
+			}else{
+				alert('You can\'t continue without entering a number.')
+				location.reload();
+			}
+		}else{
+			alert('You can\'t continue without entering a number.')
+			location.reload();
+		}
 	</script>
 </body>
 </html>

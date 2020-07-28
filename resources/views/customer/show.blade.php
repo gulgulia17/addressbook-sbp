@@ -44,6 +44,14 @@
                     </div>
                 </div>
             </div>
+          <div class="d-flex">
+            <a href="{{route('customer.edit',$customer->id)}}" class="px-2 text-warning"><i class="fas fa-pencil-alt    "></i></a>
+            <a href="#"
+                onclick="event.preventDefault(); return confirm('Are you sure? This action is irreversible.'); document.getElementById('{{$customer->id}}delete').submit();"
+                class="px-2 text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <form action="{{route('customer.destroy',$customer->id)}}" method="post"
+                class="d-none" id="{{$customer->id}}delete">@csrf @method('delete')</form>
+          </div>
           <div class="clearfix"></div>
         </div>
     </div>

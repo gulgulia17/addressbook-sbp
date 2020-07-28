@@ -194,11 +194,11 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => null,
 
-    'password_reset_url' => 'password/reset',
+    'password_reset_url' => null,
 
-    'password_email_url' => 'password/email',
+    'password_email_url' => null,
 
     'profile_url' => false,
 
@@ -244,6 +244,12 @@ return [
         [
             'text' => 'Add Customer',
             'route'  => 'customer.create',
+        ],
+        ['header' => 'SETTINGS'],
+        [
+            'text' => 'Profile Settings',
+            'route'  => 'user.profile',
+            'icon' => 'fas fa-fw fa-user',
         ],
     ],
 
