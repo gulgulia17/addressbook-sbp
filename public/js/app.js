@@ -28664,9 +28664,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var datatables_net_buttons_bs4__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_bs4__WEBPACK_IMPORTED_MODULE_1__);
 
 
-$(".custom-file-input").on("change", function () {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+$(function () {
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+  $('#table').DataTable();
 });
 
 /***/ }),
@@ -28689,8 +28692,8 @@ $(".custom-file-input").on("change", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Personal\AddressBook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Personal\AddressBook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\AddressBook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\AddressBook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

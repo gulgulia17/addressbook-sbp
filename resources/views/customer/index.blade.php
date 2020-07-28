@@ -30,10 +30,3 @@
 @stop
 
 @section('css') @stop
-@section('js')
-<script>
-  $('#table').DataTable({
-    processing: true,
-  });
-</script>
-@stop

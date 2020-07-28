@@ -19,7 +19,10 @@
     <li class="nav-item">
       <a class="nav-link pt-1" id="print" target="_blank" href="#" ><i class="fa fa-print"></i> {{__('Print')}}</a>
     </li>
-    @section('js')
+@endisset
+
+@section('js')
+@isset($customer)
       <script>
         $(function () {
           $('#print').click(function (e) { 
@@ -32,5 +35,12 @@
           });
         });
       </script>
+  @endisset
+  <script>
+    $(function () {
+      curentUrl = '{{Request::path()}}';
+      
+    });
+  </script>
   @endsection
-@endisset
+  
